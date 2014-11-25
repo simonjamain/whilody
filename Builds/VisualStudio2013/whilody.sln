@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2013
+Project("{9F206B02-614A-B959-8F94-77C25E33F52B}") = "whilody", "whilody.vcxproj", "{7EB75AE9-29E5-9A5B-2212-92DC98C06DFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7EB75AE9-29E5-9A5B-2212-92DC98C06DFF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7EB75AE9-29E5-9A5B-2212-92DC98C06DFF}.Debug|Win32.Build.0 = Debug|Win32
+		{7EB75AE9-29E5-9A5B-2212-92DC98C06DFF}.Release|Win32.ActiveCfg = Release|Win32
+		{7EB75AE9-29E5-9A5B-2212-92DC98C06DFF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
