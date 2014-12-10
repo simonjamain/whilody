@@ -21,7 +21,7 @@ CommandParser::parse(const String& commandLine)
 
 
 		//input file
-		String inputFileURI = File::getCurrentWorkingDirectory().getFullPathName() + commands[0];
+		String inputFileURI = commands[0];// request an absolute path
 
 		File inputFile(inputFileURI);
 
@@ -32,8 +32,8 @@ CommandParser::parse(const String& commandLine)
 
 		_inputFile = inputFile;
 
-		//outpur file
-		String outputFileURI = File::getCurrentWorkingDirectory().getFullPathName() + commands[1];
+		//output file
+		String outputFileURI = commands[1];// request an absolute path
 
 		_outputFileName = outputFileURI;
 		

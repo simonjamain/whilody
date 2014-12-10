@@ -28,7 +28,14 @@ public:
 	void runTest()
 	{
 		beginTest("test1: construction");
-		CommandParser commandParser("\\..\\..\\Ressources\\testSound.wav \\..\\..\\Ressources\\test.midi");
+
+		String inputSoundPath(File::getCurrentWorkingDirectory().getFullPathName() + File::separatorString + ".." + File::separatorString + ".." + File::separatorString + "Ressources" + File::separatorString + "testSound.wav");
+		String outputMidiPath(File::getCurrentWorkingDirectory().getFullPathName() + File::separatorString + ".." + File::separatorString + ".." + File::separatorString + "Ressources" + File::separatorString + "testS.midi");
+		String commandLine(inputSoundPath + " " + outputMidiPath);
+
+
+		CommandParser commandParser(commandLine);
+
 		expect(true, "Bad command interpretation.");
 		//TODO: test other commands
 	}
