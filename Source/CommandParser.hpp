@@ -21,6 +21,21 @@ private:
 	String _outputFileName;
 };
 
+class ParsingException : std::exception
+{
+public:
+    
+    ParsingException(const String& message)
+    :_message(message){};
+    
+    const char* what() const noexcept
+    {
+        return _message.toUTF8() ;
+    }
+private:
+    String _message;
+};
+
 class CommandParserTest : public UnitTest
 {
 public:
@@ -29,14 +44,19 @@ public:
 	{
 		beginTest("test1: construction");
 
-		String inputSoundPath(File::getCurrentWorkingDirectory().getFullPathName() + File::separatorString + ".." + File::separatorString + ".." + File::separatorString + "Ressources" + File::separatorString + "testSound.wav");
-		String outputMidiPath(File::getCurrentWorkingDirectory().getFullPathName() + File::separatorString + ".." + File::separatorString + ".." + File::separatorString + "Ressources" + File::separatorString + "testS.midi");
+		String inputSoundPath(File::getCurrentWorkingDirectory().getFullPathName() + File::separatorString + "testSound.wav");
+		String outputMidiPath(File::getCurrentWorkingDirectory().getFullPathName() + File::separatorString + "testMidi.midi");
 		String commandLine(inputSoundPath + " " + outputMidiPath);
 
-
-		CommandParser commandParser(commandLine);
-
-		expect(true, "Bad command interpretation.");
+        try
+        {
+            CommandParser commandParser(commandLine);
+        } catch (ParsingException e) {
+            expect(false, e.what());
+        }
+        
+        
+		
 		//TODO: test other commands
 	}
 };

@@ -16,28 +16,27 @@ CommandParser::parse(const String& commandLine)
 
 		if (commands.size() != 2)
 		{
-			usage();
-		}else
+			throw ParsingException("Le nombre de commandes n\'est pas correct.");
+		}
+        //input file
+        String inputFileURI = commands[0];// request an absolute path
+
+        File inputFile(inputFileURI);
+
+        if (!inputFile.existsAsFile())
         {
-            //input file
-            String inputFileURI = commands[0];// request an absolute path
-
-            File inputFile(inputFileURI);
-
-            if (!inputFile.existsAsFile())
-            {
-                usage();
-            }
-
-            _inputFile = inputFile;
-
-            //output file
-            String outputFileURI = commands[1];// request an absolute path
-
-            _outputFileName = outputFileURI;
-            
-            _empty = false;
+            throw ParsingException("Le fichier d\'entree n\'existe pas.");
         }
+
+        _inputFile = inputFile;
+
+        //output file
+        String outputFileURI = commands[1];// request an absolute path
+
+        _outputFileName = outputFileURI;
+        
+        _empty = false;
+    
 	}
 	else
 	{

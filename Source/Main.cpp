@@ -12,6 +12,8 @@
 #include "MainComponent.h"
 #include "CommandParser.hpp"
 
+#define NB_CHANNELS 1;
+#define SAMPLES_SIZE 2048; // about 46,5 ms for 44100 //TODO: define a time value for samples instead of a sample value! or even min/max freq to define it
 
 //==============================================================================
 class whilodyApplication  : public JUCEApplication
@@ -27,18 +29,11 @@ public:
     //==============================================================================
     void initialise (const String& commandLine) override
     {
-        // This method is where you should put your application's initialisation code..
-        CommandParser commandParser(commandLine);
-        
-        mainWindow = new MainWindow (getApplicationName());
-        
-        
-        
-        /*
         UnitTestRunner unitTestRunner;
-        
         unitTestRunner.runAllTests();
-        */
+        
+        //CommandParser commandParser(commandLine);
+
     }
 
     void shutdown() override

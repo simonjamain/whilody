@@ -59,7 +59,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "debugfile debugmidifile"
+            argument = "/Users/doctorant/Desktop/whilody/Ressources/testSound.wav /Users/doctorant/Desktop/whilody/Test/testMidi.mid"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
