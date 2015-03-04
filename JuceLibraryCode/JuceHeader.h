@@ -10,15 +10,14 @@
 
 */
 
-#ifndef __APPHEADERFILE_S6WC5D__
-#define __APPHEADERFILE_S6WC5D__
+#ifndef __APPHEADERFILE_FUCNZP__
+#define __APPHEADERFILE_FUCNZP__
 
 #include "AppConfig.h"
 #include "modules/juce_audio_basics/juce_audio_basics.h"
 #include "modules/juce_audio_devices/juce_audio_devices.h"
 #include "modules/juce_audio_formats/juce_audio_formats.h"
 #include "modules/juce_audio_processors/juce_audio_processors.h"
-#include "modules/juce_audio_utils/juce_audio_utils.h"
 #include "modules/juce_core/juce_core.h"
 #include "modules/juce_cryptography/juce_cryptography.h"
 #include "modules/juce_data_structures/juce_data_structures.h"
@@ -44,4 +43,4 @@ namespace ProjectInfo
 }
 #endif
 
-#endif   // __APPHEADERFILE_S6WC5D__
+#endif   // __APPHEADERFILE_FUCNZP__

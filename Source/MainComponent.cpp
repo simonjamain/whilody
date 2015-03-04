@@ -6,90 +6,31 @@
   ==============================================================================
 */
 
-#ifndef MAINCOMPONENT_H_INCLUDED
-#define MAINCOMPONENT_H_INCLUDED
+#include "MainComponent.h"
 
-#include "../JuceLibraryCode/JuceHeader.h"
 
 //==============================================================================
-/*
-    This component lives inside our window, and this is where you should put all
-    your controls and content.
-*/
-class MainContentComponent   : public AudioAppComponent
+MainContentComponent::MainContentComponent()
 {
-public:
-    //==============================================================================
-    MainContentComponent()
-    {
-        setSize (800, 600);
+    setSize (600, 400);
+}
 
-        // specify the number of input and output channels that we want to open
-        setAudioChannels (2, 2);
-    }
+MainContentComponent::~MainContentComponent()
+{
+}
 
-    ~MainContentComponent()
-    {
-        shutdownAudio();
-    }
+void MainContentComponent::paint (Graphics& g)
+{
+    g.fillAll (Colour (0xff001F36));
 
-    //=======================================================================
-    void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override
-    {
-        // This function will be called when the audio device is started, or when
-        // its settings (i.e. sample rate, block size, etc) are changed.
+    g.setFont (Font (16.0f));
+    g.setColour (Colours::white);
+    g.drawText ("Hello World!", getLocalBounds(), Justification::centred, true);
+}
 
-        // You can use this function to initialise any resources you might need,
-        // but be careful - it will be called on the audio thread, not the GUI thread.
-
-        // For more details, see the help for AudioProcessor::prepareToPlay()
-    }
-
-    void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill) override
-    {
-        // Your audio-processing code goes here!
-
-        // For more details, see the help for AudioProcessor::getNextAudioBlock()
-    }
-
-    void releaseResources() override
-    {
-        // This will be called when the audio device stops, or when it is being
-        // restarted due to a setting change.
-
-        // For more details, see the help for AudioProcessor::releaseResources()
-    }
-
-    //=======================================================================
-    void paint (Graphics& g) override
-    {
-        // (Our component is opaque, so we must completely fill the background with a solid colour)
-        g.fillAll (Colours::black);
-
-
-        // You can add your drawing code here!
-    }
-
-    void resized() override
-    {
-        // This is called when the MainContentComponent is resized.
-        // If you add any child components, this is where you should
-        // update their positions.
-    }
-
-
-private:
-    //==============================================================================
-
-    // Your private member variables go here...
-
-
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainContentComponent)
-};
-
-
-// (This function is called by the app startup code to create our main component)
-Component* createMainContentComponent()     { return new MainContentComponent(); }
-
-
-#endif  // MAINCOMPONENT_H_INCLUDED
+void MainContentComponent::resized()
+{
+    // This is called when the MainContentComponent is resized.
+    // If you add any child components, this is where you should
+    // update their positions.
+}

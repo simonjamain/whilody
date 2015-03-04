@@ -9,8 +9,8 @@
 */
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "MainComponent.h"
 
-Component* createMainContentComponent();
 
 //==============================================================================
 class whilodyApplication  : public JUCEApplication
@@ -66,8 +66,7 @@ public:
                                                     DocumentWindow::allButtons)
         {
             setUsingNativeTitleBar (true);
-            setContentOwned (createMainContentComponent(), true);
-            setResizable (true, true);
+            setContentOwned (new MainContentComponent(), true);
 
             centreWithSize (getWidth(), getHeight());
             setVisible (true);
