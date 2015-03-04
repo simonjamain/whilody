@@ -10,6 +10,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "MainComponent.h"
+#include "CommandParser.hpp"
 
 
 //==============================================================================
@@ -27,8 +28,17 @@ public:
     void initialise (const String& commandLine) override
     {
         // This method is where you should put your application's initialisation code..
-
+        CommandParser commandParser(commandLine);
+        
         mainWindow = new MainWindow (getApplicationName());
+        
+        
+        
+        /*
+        UnitTestRunner unitTestRunner;
+        
+        unitTestRunner.runAllTests();
+        */
     }
 
     void shutdown() override
