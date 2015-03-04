@@ -11,33 +11,33 @@ CommandParser::parse(const String& commandLine)
 {
 	if (commandLine.length() != 0)
 	{
-
+        
 		StringArray commands = StringArray::fromTokens(StringRef(commandLine), false);
 
 		if (commands.size() != 2)
 		{
 			usage();
-		}
+		}else
+        {
+            //input file
+            String inputFileURI = commands[0];// request an absolute path
 
+            File inputFile(inputFileURI);
 
-		//input file
-		String inputFileURI = commands[0];// request an absolute path
+            if (!inputFile.existsAsFile())
+            {
+                usage();
+            }
 
-		File inputFile(inputFileURI);
+            _inputFile = inputFile;
 
-		if (!inputFile.existsAsFile())
-		{
-			usage();
-		}
+            //output file
+            String outputFileURI = commands[1];// request an absolute path
 
-		_inputFile = inputFile;
-
-		//output file
-		String outputFileURI = commands[1];// request an absolute path
-
-		_outputFileName = outputFileURI;
-		
-		_empty = false;
+            _outputFileName = outputFileURI;
+            
+            _empty = false;
+        }
 	}
 	else
 	{
@@ -48,7 +48,7 @@ CommandParser::parse(const String& commandLine)
 void
 CommandParser::usage()
 {
-	exit(0);
+	
 }
 
 bool
