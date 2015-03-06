@@ -51,6 +51,8 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/AudioFormatAnalyser_7aa3794d.o \
+  $(OBJDIR)/BufferAnalyser_7aa97ec8.o \
   $(OBJDIR)/CommandParser_db3dcdab.o \
   $(OBJDIR)/MainComponent_a6ffb4a5.o \
   $(OBJDIR)/Main_90ebc5c2.o \
@@ -58,6 +60,7 @@ OBJECTS := \
   $(OBJDIR)/juce_audio_devices_a4c8a728.o \
   $(OBJDIR)/juce_audio_formats_d349f0c8.o \
   $(OBJDIR)/juce_audio_processors_44a134a2.o \
+  $(OBJDIR)/juce_audio_utils_f63b12e8.o \
   $(OBJDIR)/juce_core_aff681cc.o \
   $(OBJDIR)/juce_cryptography_25c7e826.o \
   $(OBJDIR)/juce_data_structures_bdd6d488.o \
@@ -84,6 +87,16 @@ clean:
 strip:
 	@echo Stripping whilody
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
+
+$(OBJDIR)/AudioFormatAnalyser_7aa3794d.o: ../../Source/AudioFormatAnalyser.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling AudioFormatAnalyser.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/BufferAnalyser_7aa97ec8.o: ../../Source/BufferAnalyser.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling BufferAnalyser.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/CommandParser_db3dcdab.o: ../../Source/CommandParser.cpp
 	-@mkdir -p $(OBJDIR)
@@ -118,6 +131,11 @@ $(OBJDIR)/juce_audio_formats_d349f0c8.o: ../../JuceLibraryCode/modules/juce_audi
 $(OBJDIR)/juce_audio_processors_44a134a2.o: ../../JuceLibraryCode/modules/juce_audio_processors/juce_audio_processors.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling juce_audio_processors.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/juce_audio_utils_f63b12e8.o: ../../JuceLibraryCode/modules/juce_audio_utils/juce_audio_utils.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling juce_audio_utils.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/juce_core_aff681cc.o: ../../JuceLibraryCode/modules/juce_core/juce_core.cpp

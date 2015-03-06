@@ -1,3 +1,6 @@
+#ifndef COMMANDPARSER_HPP_INCLUDED
+#define COMMANDPARSER_HPP_INCLUDED
+
 #include "../JuceLibraryCode/JuceHeader.h"
 
 class CommandParser
@@ -30,7 +33,7 @@ public:
     
     const char* what() const noexcept
     {
-        return _message.toUTF8() ;
+        return _message.toUTF8();
     }
 private:
     String _message;
@@ -62,3 +65,4 @@ public:
 };
 
 static CommandParserTest commandParserTest;
+#endif

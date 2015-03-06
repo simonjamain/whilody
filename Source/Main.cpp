@@ -11,9 +11,16 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "MainComponent.h"
 #include "CommandParser.hpp"
+#include "BufferAnalyser.hpp"
 
-#define NB_CHANNELS 1;
-#define SAMPLES_SIZE 2048; // about 46,5 ms for 44100 //TODO: define a time value for samples instead of a sample value! or even min/max freq to define it
+#define LOWEST_FREQ 20.0f
+#define HIGHEST_FREQ 8000.0f
+
+#define BUFFER_SIZE 4096
+
+#define USE_LEFT_CHANNEL true
+#define USE_RIGHT_CHANNEL false
+
 
 //==============================================================================
 class whilodyApplication  : public JUCEApplication
@@ -32,8 +39,42 @@ public:
         UnitTestRunner unitTestRunner;
         unitTestRunner.runAllTests();
         
-        //CommandParser commandParser(commandLine);
-
+        CommandParser commandParser(commandLine);
+        
+        AudioFormatManager audioFormatManager; audioFormatManager.registerBasicFormats();// TODO: precise which format we want to use
+        
+        FileInputStream soundStream(commandParser.getInputFile());
+        
+        AudioFormatReader* soundReader = audioFormatManager.createReaderFor(&soundStream);
+        
+        BufferAnalyser bufferAnalyser(LOWEST_FREQ,HIGHEST_FREQ);
+        
+        AudioSampleBuffer buffer(soundReader->numChannels, BUFFER_SIZE);
+        
+        int64 bufferSize = (int64)buffer.getNumSamples();
+        int64 startSample = 0;
+        int64 totalSamples = soundReader->lengthInSamples;
+        
+        while(startSample < totalSamples)
+        {
+            try
+            {
+                soundReader->read(&buffer, 0, (int)bufferSize, startSample, USE_LEFT_CHANNEL, USE_RIGHT_CHANNEL);
+                
+                int note = bufferAnalyser.getPitch(buffer, soundReader->sampleRate);
+                //printf("note: %d\n", note);
+                //do noteOn
+            } catch (BelowDetectionLevelException e)
+            {
+                //do noteOff
+            }
+            
+            startSample += bufferSize;
+        }
+        
+        
+        // the window
+        mainWindow = new MainWindow (getApplicationName());
     }
 
     void shutdown() override

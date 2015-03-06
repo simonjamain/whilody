@@ -1,5 +1,4 @@
 #include "CommandParser.hpp"
-#include "../JuceLibraryCode/JuceHeader.h"
 
 CommandParser::CommandParser(const String& commandLine)
 {
