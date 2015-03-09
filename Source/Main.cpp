@@ -13,14 +13,33 @@
 #include "CommandParser.hpp"
 #include "BufferAnalyser.hpp"
 
-#define LOWEST_FREQ 20.0f
-#define HIGHEST_FREQ 8000.0f
+#define LOWEST_FREQ 20.
+#define HIGHEST_FREQ 8000.
 
 #define BUFFER_SIZE 4096
 
 #define USE_LEFT_CHANNEL true
 #define USE_RIGHT_CHANNEL false
 
+#define MIDI_CHANNEL 1
+#define MIDI_INSTRUMENT 85//choir
+#define MIDI_VELOCITY 127
+//TODO: enable/disable dynamic velocity
+
+void addNoteOn(MidiMessageSequence* midiMessageSequence, uint8 noteNumber, double timestamp, bool* isPlaying)
+{
+    MidiMessage noteOn = MidiMessage::noteOn(MIDI_CHANNEL, noteNumber, (uint8)MIDI_VELOCITY);
+    noteOn.setTimeStamp(timestamp);
+    midiMessageSequence->addEvent(noteOn);
+    *isPlaying = true;
+};
+void addNoteOff(MidiMessageSequence* midiMessageSequence, uint8 noteNumber, double timestamp, bool* isPlaying)
+{
+    MidiMessage noteOff = MidiMessage::noteOff(MIDI_CHANNEL, noteNumber, (uint8)MIDI_VELOCITY);
+    noteOff.setTimeStamp(timestamp);
+    midiMessageSequence->addEvent(noteOff);
+    *isPlaying = false;
+};
 
 //==============================================================================
 class whilodyApplication  : public JUCEApplication
@@ -55,23 +74,70 @@ public:
         int64 startSample = 0;
         int64 totalSamples = soundReader->lengthInSamples;
         
+        //midi
+        
+        
+        uint8 currNoteNumber = 0;
+        bool isPlaying = false;
+        /*
         while(startSample < totalSamples)
         {
+            double timestamp = double(startSample) / double(soundReader->sampleRate);
             try
             {
                 soundReader->read(&buffer, 0, (int)bufferSize, startSample, USE_LEFT_CHANNEL, USE_RIGHT_CHANNEL);
                 
-                int note = bufferAnalyser.getPitch(buffer, soundReader->sampleRate);
-                //printf("note: %d\n", note);
+                uint8 noteNumber = bufferAnalyser.getPitch(buffer, soundReader->sampleRate);
+                
                 //do noteOn
+                //printf("note: %d\n", note);
+                if (!isPlaying)
+                {
+                    addNoteOn(&midiMessageSequence, noteNumber, timestamp, &isPlaying);
+                    
+                    printf("noteOn: %d\n", noteNumber);
+                }else if (currNoteNumber != noteNumber)
+                {
+                    addNoteOff(&midiMessageSequence, currNoteNumber, timestamp, &isPlaying);
+                    printf("noteOff: %d\n", currNoteNumber);
+                    
+                    addNoteOn(&midiMessageSequence, noteNumber, timestamp, &isPlaying);
+                    printf("noteOn: %d\n", noteNumber);
+                }
+                currNoteNumber = noteNumber;
+                
             } catch (BelowDetectionLevelException e)
             {
                 //do noteOff
+                if(isPlaying)
+                {
+                    addNoteOff(&midiMessageSequence, currNoteNumber, timestamp, &isPlaying);
+                    printf("noteOff: %d\n", currNoteNumber);
+                }
             }
-            
             startSample += bufferSize;
-        }
+        }*/
+        //TODO send allnotesoff
         
+        
+        MidiMessageSequence midiMessageSequence;
+        //midiMessageSequence.addEvent(MidiMessage::tempoMetaEvent(<#int microsecondsPerQuarterNote#>))
+        midiMessageSequence.addEvent(MidiMessage::noteOn(1,69,uint8(127)), 0.0f);
+        midiMessageSequence.addEvent(MidiMessage::allNotesOff(1), 64.0f);
+        //midiMessageSequence.sort();
+        
+        MidiFile midiFile;
+        midiFile.addTrack(midiMessageSequence);
+        midiFile.setTicksPerQuarterNote(32);
+        
+        File outputFile(commandParser.getOutputFileName());
+        if(!outputFile.deleteFile())//ensure file
+        {
+            throw "impossible d'écrire sur le fichier";
+        }
+        FileOutputStream outputStream(outputFile);
+        midiFile.writeTo(outputStream);
+        outputStream.flush();
         
         // the window
         mainWindow = new MainWindow (getApplicationName());

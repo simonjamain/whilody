@@ -17,7 +17,7 @@ BufferAnalyser::~BufferAnalyser()
     delete(_fft);
 }
 
-int
+uint8
 BufferAnalyser::getPitch(const AudioSampleBuffer& buffer, double sampleRate)
 {
     double level = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
@@ -115,5 +115,5 @@ BufferAnalyser::getPitch(const AudioSampleBuffer& buffer, double sampleRate)
     double f0 = sampleRate / minDistanceOffset;
     */
     
-    return (int) floor(((log(f0/440.)/log(2)) * 12.) + 69.);//todo: put this in a function
+    return (uint8) floor(((log(f0/440.)/log(2)) * 12.) + 69.);//todo: put this in a function
 }

@@ -60,11 +60,11 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "/Users/doctorant/Desktop/whilody/Ressources/testSound.wav /Users/doctorant/Desktop/whilody/Test/testMidi.mid"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "/Users/doctorant/Desktop/whilody/Ressources/la440midi69.wav /Users/doctorant/Desktop/whilody/Test/testMidi.mid"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

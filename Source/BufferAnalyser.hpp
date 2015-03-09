@@ -10,7 +10,7 @@ public:
     BufferAnalyser(double lowestFreq, double highestFreq)
     :_lowestFreq(lowestFreq),_highestFreq(highestFreq),_fft(new FFT(12, false)){}
     
-    int getPitch(const AudioSampleBuffer& buffer, double sampleRate);
+    uint8 getPitch(const AudioSampleBuffer& buffer, double sampleRate);
 private:
     double _lowestFreq;
     double _highestFreq;
