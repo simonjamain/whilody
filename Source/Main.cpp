@@ -24,6 +24,7 @@
 #define MIDI_CHANNEL 1
 #define MIDI_INSTRUMENT 85//choir
 #define MIDI_VELOCITY 127
+#define MIDI_MICROSECONDS_PER_QUARTER 250000
 //TODO: enable/disable dynamic velocity
 
 void addNoteOn(MidiMessageSequence* midiMessageSequence, uint8 noteNumber, double timestamp, bool* isPlaying)
@@ -75,14 +76,16 @@ public:
         int64 totalSamples = soundReader->lengthInSamples;
         
         //midi
-        
+        MidiMessageSequence midiMessageSequence;
+        midiMessageSequence.addEvent(MidiMessage::tempoMetaEvent(250000));
         
         uint8 currNoteNumber = 0;
         bool isPlaying = false;
-        /*
+        
         while(startSample < totalSamples)
         {
             double timestamp = double(startSample) / double(soundReader->sampleRate);
+            timestamp *= (double(MIDI_MICROSECONDS_PER_QUARTER)/1000./5.);
             try
             {
                 soundReader->read(&buffer, 0, (int)bufferSize, startSample, USE_LEFT_CHANNEL, USE_RIGHT_CHANNEL);
@@ -112,20 +115,23 @@ public:
                 if(isPlaying)
                 {
                     addNoteOff(&midiMessageSequence, currNoteNumber, timestamp, &isPlaying);
-                    printf("noteOff: %d\n", currNoteNumber);
+                    printf("noteOff: %d (low level)\n", currNoteNumber);
                 }
             }
             startSample += bufferSize;
-        }*/
-        //TODO send allnotesoff
+        }
+        double timestampEnd = double(totalSamples+bufferSize) / double(soundReader->sampleRate);
+        timestampEnd *= (double(MIDI_MICROSECONDS_PER_QUARTER)/1000./5.);
+        midiMessageSequence.addEvent(MidiMessage::allNotesOff(1), timestampEnd);
+        //TODO: note off only if last event is noteOn
         
-        
+        /*
         MidiMessageSequence midiMessageSequence;
-        //midiMessageSequence.addEvent(MidiMessage::tempoMetaEvent(<#int microsecondsPerQuarterNote#>))
-        midiMessageSequence.addEvent(MidiMessage::noteOn(1,69,uint8(127)), 0.0f);
-        midiMessageSequence.addEvent(MidiMessage::allNotesOff(1), 64.0f);
+        midiMessageSequence.addEvent(MidiMessage::tempoMetaEvent(250000));
+        midiMessageSequence.addEvent(MidiMessage::noteOn(1,69,uint8(127)), 0.);
+        midiMessageSequence.addEvent(MidiMessage::allNotesOff(1), 4.);
         //midiMessageSequence.sort();
-        
+        */
         MidiFile midiFile;
         midiFile.addTrack(midiMessageSequence);
         midiFile.setTicksPerQuarterNote(32);
