@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="fucnZp" name="whilody" projectType="guiapp" version="1.0.0"
+              bundleIdentifier="com.yourcompany.whilody" includeBinaryInAppConfig="1"
+              jucerVersion="3.1.0">
+  <MAINGROUP id="HrX0zJ" name="whilody">
+    <GROUP id="{7023F419-DCB2-88DD-1D14-649E4F1009D6}" name="Source">
+      <FILE id="binXz9" name="AudioInMidiOut.cpp" compile="1" resource="0"
+            file="Source/AudioInMidiOut.cpp"/>
+      <FILE id="jFGt3e" name="AudioInMidiOut.h" compile="0" resource="0"
+            file="Source/AudioInMidiOut.h"/>
+      <FILE id="AnNtWI" name="BufferAnalyser.cpp" compile="1" resource="0"
+            file="Source/BufferAnalyser.cpp"/>
+      <FILE id="lUrssH" name="BufferAnalyser.hpp" compile="0" resource="0"
+            file="Source/BufferAnalyser.hpp"/>
+      <FILE id="xtFG5o" name="CommandParser.cpp" compile="1" resource="0"
+            file="Source/CommandParser.cpp"/>
+      <FILE id="n8I3RP" name="CommandParser.hpp" compile="0" resource="0"
+            file="Source/CommandParser.hpp"/>
+      <FILE id="dhpW2q" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" documentExtensions="wav,mp3,aif">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       isDebug="1" optimisation="1" targetName="whilody"/>
+        <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       isDebug="0" optimisation="2" targetName="whilody"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_video" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../Desktop/lib/JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <LINUX_MAKE targetFolder="Builds/Linux">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
+                       targetName="whilody"/>
+        <CONFIGURATION name="Release" libraryPath="/usr/X11R6/lib/" isDebug="0" optimisation="2"
+                       targetName="whilody"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_video" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../Desktop/lib/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../Desktop/lib/JUCE/modules"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULES id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_audio_utils" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_core" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_cryptography" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_events" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_opengl" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_video" showAllCode="1" useLocalCopy="1"/>
+  </MODULES>
+  <JUCEOPTIONS/>
+</JUCERPROJECT>
